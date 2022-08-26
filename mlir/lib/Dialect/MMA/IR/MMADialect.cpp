@@ -82,8 +82,9 @@ LogicalResult mma::outerProductIOp::verify() {
   Type ta = aType.getElementType();
   Type tb = bType.getElementType();
   Type tc = cType.getElementType();
-  if ((!(ta.isI16() && tb.isI16()) && !(ta.isI8() && tb.isI8())) || !tc.isF32())
-  //ta and tb both are I16 OR ta and tb both are I8
+  if ((!(ta.isInteger(16) && tb.isInteger(16)) || !tc.isF32())) 
+  //&& !(ta.isI8() && tb.isI8())) 
+  //ta and tb both are I16 
   //have to add support for UI8
   //tc is I32
     return emitOpError("unsupported type combination");
